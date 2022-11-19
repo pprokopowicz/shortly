@@ -14,6 +14,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "async-trait"
+version = "0.1.58"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1e805d94e6b5001b651426cf4cd446b1ab5f319d27bab5c644f61de0a804360c"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "atoi"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -847,6 +858,7 @@ dependencies = [
 name = "shortly-app"
 version = "0.1.0"
 dependencies = [
+ "shortly-data",
  "tokio",
 ]
 
@@ -854,6 +866,7 @@ dependencies = [
 name = "shortly-data"
 version = "0.1.0"
 dependencies = [
+ "async-trait",
  "dotenv",
  "sqlx",
  "tokio",

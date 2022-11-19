@@ -9,7 +9,7 @@ pub struct DbConnection {
 }
 
 impl DbConnection {
-    pub async fn new() -> Result<DbConnection, sqlx::Error> {
+    pub async fn new() -> Result<Self, sqlx::Error> {
         dotenv().ok();
 
         let db_url = env::var(DB_ENV_KEY).expect("DATABASE_URL must be set");
