@@ -3,5 +3,9 @@
 version = 3
 
 [[package]]
+name = "shortly-app"
+version = "0.1.0"
+
+[[package]]
 name = "shortly-data"
 version = "0.1.0"

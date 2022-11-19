@@ -1,5 +1,6 @@
 [workspace]
 
 members = [
-    "shortly-data"
+    "shortly-data",
+    "shortly-app"
 ]
