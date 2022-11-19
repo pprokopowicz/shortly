@@ -2,7 +2,7 @@ use async_trait::async_trait;
 
 use crate::{
     db::DbConnection,
-    model::{NewUrlEntry, UrlEntry},
+    model::url_entry::{NewUrlEntry, UrlEntry},
 };
 
 #[async_trait]
