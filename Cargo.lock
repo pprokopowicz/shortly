@@ -859,6 +859,7 @@ name = "shortly-app"
 version = "0.1.0"
 dependencies = [
  "shortly-data",
+ "shortly-domain",
  "tokio",
 ]
 
@@ -870,6 +871,13 @@ dependencies = [
  "dotenv",
  "sqlx",
  "tokio",
+]
+
+[[package]]
+name = "shortly-domain"
+version = "0.1.0"
+dependencies = [
+ "shortly-data",
 ]
 
 [[package]]
