@@ -1,5 +1,5 @@
-use shortly_data::model::url_entry::NewUrlEntry as NewUrlEntryData;
 use crate::model::url_entry::NewUrlEntry;
+use shortly_data::model::url_entry::NewUrlEntry as NewUrlEntryData;
 
 pub trait NewUrlEntryMapper {
     fn map(url_entry: NewUrlEntry) -> NewUrlEntryData;
