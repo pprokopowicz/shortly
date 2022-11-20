@@ -6,5 +6,5 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-shortly-data = { path = "../shortly-data" }
 anyhow = "1.0.66"
+shortly-data = { path = "../shortly-data" }
