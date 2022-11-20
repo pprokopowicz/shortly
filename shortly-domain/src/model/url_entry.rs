@@ -22,3 +22,12 @@ pub struct NewUrlEntry {
     pub external_id: String,
     pub target_url: String,
 }
+
+impl NewUrlEntry {
+    pub fn new(external_id: String, target_url: String) -> Self {
+        NewUrlEntry {
+            external_id,
+            target_url,
+        }
+    }
+}

@@ -20,7 +20,8 @@ impl<Repository: UrlEntryRepository, Mapper: NewUrlEntryMapper>
         }
     }
 
-    pub async fn execute(&self, new_entry: NewUrlEntry) -> Result<UrlEntry> {
+    pub async fn execute(&self, url: &str) -> Result<UrlEntry> {
+        let new_entry = NewUrlEntry::new("xD".to_string(), url.to_string());
         let data = self.mapper.map(new_entry);
         let new_entry_data = self.repository.insert(data).await?;
 

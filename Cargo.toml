@@ -3,5 +3,6 @@
 members = [
     "shortly-data",
     "shortly-domain",
+    "shortly-route",
     "shortly-app",
 ]
