@@ -9,9 +9,9 @@ pub struct AllUrlEntriesUseCase<Repository: UrlEntryRepository> {
 }
 
 impl<Repository: UrlEntryRepository> AllUrlEntriesUseCase<Repository> {
-    pub fn new(repository: Repository) -> Self {
+    pub fn new(repository: Arc<Repository>) -> Self {
         AllUrlEntriesUseCase {
-            repository: Arc::new(repository),
+            repository: repository,
         }
     }
 

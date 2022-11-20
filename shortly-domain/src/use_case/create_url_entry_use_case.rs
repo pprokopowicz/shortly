@@ -13,9 +13,9 @@ pub struct CreateUrlEntryUseCase<Repository: UrlEntryRepository, Mapper: NewUrlE
 impl<Repository: UrlEntryRepository, Mapper: NewUrlEntryMapper>
     CreateUrlEntryUseCase<Repository, Mapper>
 {
-    pub fn new(repository: Repository, mapper: Mapper) -> Self {
+    pub fn new(repository: Arc<Repository>, mapper: Mapper) -> Self {
         CreateUrlEntryUseCase {
-            repository: Arc::new(repository),
+            repository: repository,
             mapper: mapper,
         }
     }

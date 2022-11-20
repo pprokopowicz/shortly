@@ -1,13 +1,17 @@
-use axum::{
-    http::{Response, StatusCode},
-    response::IntoResponse,
-    Json,
-};
 use serde_json::json;
 
+use axum::{
+    body::Body,
+    http::{Response, StatusCode},
+    response::IntoResponse, Json
+};
+
 pub async fn fallback() -> impl IntoResponse {
+    let json = Json(json!({"error": "Not found"})).to_string();
+
     Response::builder()
-        .status(StatusCode::NOT_FOUND)
-        .body(Json(json!({"error": "Route not found"})))
-        .unwrap();
+        .header("Content-Type", "application/json")
+        .status(StatusCode::INTERNAL_SERVER_ERROR)
+        .body(Body::from(json))
+        .unwrap()
 }

@@ -20,6 +20,23 @@ pub struct ModulesImpl {
     url_entry_use_case: UrlEntryUseCase<UrlEntryRepositoryImpl>,
 }
 
+impl ModulesImpl {
+    pub fn new(
+        all_url_entries_use_case: AllUrlEntriesUseCase<UrlEntryRepositoryImpl>,
+        create_url_entry_use_case: CreateUrlEntryUseCase<
+            UrlEntryRepositoryImpl,
+            NewUrlEntryMapperImpl,
+        >,
+        url_entry_use_case: UrlEntryUseCase<UrlEntryRepositoryImpl>,
+    ) -> Self {
+        ModulesImpl {
+            all_url_entries_use_case,
+            create_url_entry_use_case,
+            url_entry_use_case,
+        }
+    }
+}
+
 impl Modules for ModulesImpl {
     type Repository = UrlEntryRepositoryImpl;
     type Mapper = NewUrlEntryMapperImpl;
