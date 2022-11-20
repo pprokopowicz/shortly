@@ -1,5 +1,5 @@
 use anyhow::Result;
-use axum::{Extension, Router, handler::Handler};
+use axum::{handler::Handler, Extension, Router};
 use shortly_data::{db::DbConnection, repository::url_repository::UrlEntryRepositoryImpl};
 use shortly_domain::{
     mapper::url_entry_mapper::NewUrlEntryMapperImpl,

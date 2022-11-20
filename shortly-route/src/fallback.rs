@@ -3,7 +3,8 @@ use serde_json::json;
 use axum::{
     body::Body,
     http::{Response, StatusCode},
-    response::IntoResponse, Json
+    response::IntoResponse,
+    Json,
 };
 
 pub async fn fallback() -> impl IntoResponse {
