@@ -1,26 +1,28 @@
 use shortly_data::repository::url_repository::UrlEntryRepository;
 use std::sync::Arc;
+use anyhow::Result;
 
 use crate::model::url_entry::UrlEntry;
 
-pub struct AllEntriesUseCase<Repository: UrlEntryRepository> {
+pub struct AllUrlEntriesUseCase<Repository: UrlEntryRepository> {
     repository: Arc<Repository>,
 }
 
-impl<Repository: UrlEntryRepository> AllEntriesUseCase<Repository> {
+impl<Repository: UrlEntryRepository> AllUrlEntriesUseCase<Repository> {
     pub fn new(repository: Repository) -> Self {
-        AllEntriesUseCase {
+        AllUrlEntriesUseCase {
             repository: Arc::new(repository),
         }
     }
 
-    pub async fn execute(&self) -> Vec<UrlEntry> {
-        self.repository
+    pub async fn execute(&self) -> Result<Vec<UrlEntry>> {
+        let entries = self.repository
             .fetch_all()
-            .await
-            .unwrap()
+            .await?
             .into_iter()
             .map(|entry| UrlEntry::from(entry))
-            .collect()
+            .collect();
+        
+        Ok(entries)
     }
 }

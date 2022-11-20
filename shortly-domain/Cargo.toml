@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 shortly-data = { path = "../shortly-data" }
+anyhow = "1.0.66"

@@ -1,1 +1,1 @@
-pub mod all_entries_use_case;
+pub mod all_url_entries_use_case;
