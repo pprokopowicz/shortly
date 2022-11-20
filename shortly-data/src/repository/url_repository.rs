@@ -1,4 +1,5 @@
 use async_trait::async_trait;
+use anyhow::Result;
 
 use crate::{
     db::DbConnection,
@@ -7,9 +8,9 @@ use crate::{
 
 #[async_trait]
 pub trait UrlEntryRepository {
-    async fn fetch_all(&self) -> Result<Vec<UrlEntry>, sqlx::Error>;
-    async fn fetch_by_external_id(&self, external_id: &str) -> Result<UrlEntry, sqlx::Error>;
-    async fn insert(&self, url_entry: NewUrlEntry) -> Result<UrlEntry, sqlx::Error>;
+    async fn fetch_all(&self) -> Result<Vec<UrlEntry>>;
+    async fn fetch_by_external_id(&self, external_id: &str) -> Result<UrlEntry>;
+    async fn insert(&self, url_entry: NewUrlEntry) -> Result<UrlEntry>;
 }
 
 pub struct UrlEntryRepositoryImpl {
@@ -24,24 +25,28 @@ impl UrlEntryRepositoryImpl {
 
 #[async_trait]
 impl UrlEntryRepository for UrlEntryRepositoryImpl {
-    async fn fetch_all(&self) -> Result<Vec<UrlEntry>, sqlx::Error> {
-        sqlx::query_as!(UrlEntry, "SELECT * FROM url")
+    async fn fetch_all(&self) -> Result<Vec<UrlEntry>> {
+        let entries = sqlx::query_as!(UrlEntry, "SELECT * FROM url")
             .fetch_all(&self.conn.pool)
-            .await
+            .await?;
+
+        Ok(entries)
     }
 
-    async fn fetch_by_external_id(&self, external_id: &str) -> Result<UrlEntry, sqlx::Error> {
-        sqlx::query_as!(
+    async fn fetch_by_external_id(&self, external_id: &str) -> Result<UrlEntry> {
+        let entry = sqlx::query_as!(
             UrlEntry,
             "SELECT * FROM url WHERE external_id = $1",
             external_id
         )
         .fetch_one(&self.conn.pool)
-        .await
+        .await?;
+
+        Ok(entry)
     }
 
-    async fn insert(&self, url_entry: NewUrlEntry) -> Result<UrlEntry, sqlx::Error> {
-        sqlx::query_as!(
+    async fn insert(&self, url_entry: NewUrlEntry) -> Result<UrlEntry> {
+        let new_entry = sqlx::query_as!(
             UrlEntry,
             "INSERT INTO url (external_id, target_url) VALUES ( $1, $2 )
             RETURNING *",
@@ -49,6 +54,8 @@ impl UrlEntryRepository for UrlEntryRepositoryImpl {
             &url_entry.target_url
         )
         .fetch_one(&self.conn.pool)
-        .await
+        .await?;
+
+        Ok(new_entry)
     }
 }
